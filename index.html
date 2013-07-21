@@ -5,18 +5,37 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="./static/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="./static/css/main.css" rel="stylesheet" />
 
         <script src="./static/js/jquery-1.9.1.min.js"></script>
         <script src="./static/js/bootstrap.min.js"></script>
         <script src="./static/js/underscore-min.js"></script>
         <script src="./static/js/backbone-min.js"></script>
-
-        <script src="./static/js/main.js"></script>
     </head>
     <body>
-        цлассиц линеаге покер гаме
-        <a href="#!/">/</a><br/>
-        <a href="#!/start">/start</a><br/>
-        <a href="#!/game">/games</a><br/>
+        <div id="wrapper">
+            <div id="content">
+                <h1>ЛИНЕАГЕ КЛАССИК ПОКЕР</h1>
+
+                <p>
+                    <a href="#!/start"><button>Играть</button></a>
+                </p>
+            </div>
+            <div id="start-window">
+                <p>CONFIDENTIALITY STATEMENT: AUTHORITIES: The information asked for on this form is requested pursuant to Section 222 of the Immigration and Nationality Act. Section 222(f) provides that the records of the Department of State and of diplomatic and consular offices of the United States pertaining to the issuance and refusal of visas or permits to enter the United States shall be considered confidential and shall be used only for the formulation, amendment, administration, or enforcement of the immigration, nationality, and other laws of the United States. Certified copies of such records may be made available to a court provided the court certifies that the information contained in such records is needed in a case pending before the court. PURPOSE: The U.S. Department of State uses the facts you provide on this form primarily to determine your classification and eligibility for a U.S. immigrant visa. Individu</p>
+
+                <p class="center">
+                    <a href="#!/game"><button>Начать игру</button></a>
+                    <a href="#!/"><button>Закрыть</button></a>
+                </p>
+            </div>
+            <div id="game-window" class="">
+                <h1>ВЫ ПРОИГРАЛИ, УВЫ</h1>
+                <p class="center">
+                    <a href="#!/"><button>Закрыть</button></a>
+                </p>
+            </div>
+        </div>
+        <script src="./static/js/main.js"></script>
     </body>
 </html>

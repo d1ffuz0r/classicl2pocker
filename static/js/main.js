@@ -6,34 +6,63 @@ var Game = Backbone.Model.extend({});
 
 // collections
 
-var GameCollection = Backbone.Collection.extend({
+var CardsCollection = Backbone.Collection.extend({
     model: Card,
+});
+
+
+// views
+var BaseView = Backbone.View.extend({
+    hide: function(){
+        this.$el.removeClass('active');
+    },
+    show: function(){
+        console.log(this.$el)
+        this.$el.addClass('active');
+        console.log(this.$el)
+    },
+});
+
+var StartView = BaseView.extend({
+    el: $("#start-window"),
+});
+
+var GameView = BaseView.extend({
+    el: $("#game-window"),
 });
 
 // routing
 
-var Router = Backbone.Router.extend({
+var App = Backbone.Router.extend({
     routes: {
         "!/start": "start",
-        "!/game":  "game",
         "!/":      "default",
+        "!/game":  "game",
+    },
+
+    initialize: function() {
+        this.start = new StartView;
+        this.game = new GameView;
     },
 
     start: function() {
-        console.log('rppt');
+        console.log(this.start);
+        this.start.show();
     },
 
     game: function() {
-        console.log('game');
+        this.start.hide();
+        this.game.show();
     },
 
     default: function() {
-        console.log('default');
+        this.start.hide();
+        this.game.hide();
     },
 });
 
 
 $(document).ready(function(){
-    new Router();
+    var app = new App();
     Backbone.history.start();
 });
