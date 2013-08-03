@@ -82,7 +82,7 @@ body {
 
 .cart {
     cursor: pointer;
-    background: red;
+    background: #fff;
     height: 100px;
     width: 110px;
 }
