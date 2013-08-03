@@ -47,7 +47,7 @@ var select_prof = function(){
     var prof = null;
 
     while(!prof){
-        prof = professions[Math.floor(Math.random(professions.length) * 10)]
+        prof = professions[Math.round(Math.random(professions.length) * 10)]
     }
     return prof;
 
