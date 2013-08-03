@@ -186,14 +186,14 @@ var GameView = BaseView.extend({
     },
 
     pass_cards: function(){
-        if(this.passes <= 1){
-            this.passes += 1;
+        this.passes += 1;
+
+        if(this.passes <= 2){
+            this.update_collection(null, 2, true);
         } else {
             this.$el.find('.pass-cards').hide();
             this.$el.find('.pass-cards-message').show();
-            return
         }
-        this.update_collection(null, 2, true);
     },
 
     pass_party: function(){
