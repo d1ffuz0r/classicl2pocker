@@ -28,6 +28,36 @@ body {
     border-radius: 7px;
     padding: 10px;
 }
+#game-window {
+    width: 90%;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 50px;
+    height: 85%;
+    min-height: 600px;
+}
+
+#game-window .table-row{
+    position: relative;
+    display: table-row;
+    height: 10%;
+    width: 100%;
+}
+#game-window ul, #game-window li{
+    float: left;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+}
+#game-window li {
+    width: 100px;
+    height: 140px;
+    margin: 10px;
+    position: relative;
+    display: table-column;
+}
 #start-window .center {
     text-align: center;
 }
@@ -37,4 +67,12 @@ body {
 }
 .active {
     display: block !important;
+}
+
+
+.cart {
+    cursor: pointer;
+    background: red;
+    height: 100px;
+    width: 110px;
 }

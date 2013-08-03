@@ -17,9 +17,7 @@ var BaseView = Backbone.View.extend({
         this.$el.removeClass('active');
     },
     show: function(){
-        console.log(this.$el)
         this.$el.addClass('active');
-        console.log(this.$el)
     },
 });
 
