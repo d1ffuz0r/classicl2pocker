@@ -173,11 +173,11 @@ var GameView = BaseView.extend({
 
         this.shit_collection = new ShitCollection();
         this.shit_collection.container = this.$el.find('.shit-row ul');
-        this.update_collection(this.shit_collection, 10, false, SHIT);
+        this.update_collection(this.shit_collection, 9, false, SHIT);
 
         this.dd_collection = new DDCollection();
         this.dd_collection.container = this.$el.find('.dd-row ul');
-        this.update_collection(this.dd_collection, 10, false, DD);
+        this.update_collection(this.dd_collection, 9, false, DD);
     },
 
     pass_cards: function(){

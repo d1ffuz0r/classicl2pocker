@@ -37,7 +37,7 @@ body {
     min-height: 600px;
 }
 
-#game-window .table-row{
+#game-window .table-row {
     position: relative;
     display: table-row;
     height: 10%;
@@ -59,7 +59,7 @@ body {
     width: 100%;
 }
 #game-window li {
-    width: 100px;
+    width: 117px;
     height: 140px;
     margin: 10px;
     position: relative;
