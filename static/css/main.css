@@ -16,7 +16,6 @@ body {
     position: relative;
 }
 
-
 #start-window, #game-window {
     position: absolute;
     z-index: 2;
@@ -44,6 +43,14 @@ body {
     height: 10%;
     width: 100%;
 }
+#game-window .table-row.support-row li{
+    width: 18%;
+}
+
+#game-window .table-row.support-row li p{
+    margin: 0 auto;
+}
+
 #game-window ul, #game-window li{
     float: left;
     padding: 0;

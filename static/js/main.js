@@ -119,12 +119,11 @@ var GameView = BaseView.extend({
         'click .pass-party': 'pass_party',
     },
 
-    update_collection: function(collection, start, end, replace, type){
-        if (!start) { start = 0; }
+    update_collection: function(collection, end, replace, type){
         if (!end) { end = 0; }
 
 
-        for (var i = start; i < end; i++) {
+        for (var i = 0; i < end; i++) {
             var profs = professions;
 
             var prof = select_prof(profs, type);
@@ -150,7 +149,6 @@ var GameView = BaseView.extend({
                     var rnd = Math.floor(Math.random(count) * 10);
                     var prof_replace = collection.at(rnd);
                 }
-                console.log(prof_replace)
                 collection.removeCard(prof_replace.id);
             }
 
@@ -170,16 +168,16 @@ var GameView = BaseView.extend({
     initialize: function(){
         this.support_collection = new SupportCollection();
         this.support_collection.container = this.$el.find('.support-row ul');
-        this.update_collection(this.support_collection, 0, 8, false, SUPPORT);
+        this.update_collection(this.support_collection, 5, false, SUPPORT);
 
 
         this.shit_collection = new ShitCollection();
         this.shit_collection.container = this.$el.find('.shit-row ul');
-        this.update_collection(this.shit_collection, 0, 10, false, SHIT);
+        this.update_collection(this.shit_collection, 10, false, SHIT);
 
         this.dd_collection = new DDCollection();
         this.dd_collection.container = this.$el.find('.dd-row ul');
-        this.update_collection(this.dd_collection, 0, 10, false, DD);
+        this.update_collection(this.dd_collection, 10, false, DD);
     },
 
     pass_cards: function(){
@@ -190,11 +188,11 @@ var GameView = BaseView.extend({
             this.$el.find('.pass-cards-message').show();
             return
         }
-        this.update_collection(null, 0, 2, true);
+        this.update_collection(null, 2, true);
     },
 
     pass_party: function(){
-        this.update_collection(null, 0, 3, true);
+        this.update_collection(null, 3, true);
     },
 });
 
