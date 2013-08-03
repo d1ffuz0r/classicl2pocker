@@ -113,14 +113,38 @@ var GameView = BaseView.extend({
     initialize: function(){
         this.support_collection = new SupportCollection();
         this.support_collection.container = this.$el.find('.support-row ul');
+        this.pass_cards();
 
         this.shit_collection = new ShitCollection();
+        this.shit_collection.container = this.$el.find('.shit-row ul');
+        for (var i = 10; i < 20; i++) {
+            var prof = professions[i];
+            var card = new CardView({id: 'card' + i,
+                                     model: new Card({
+                                         'title': prof.title,
+                                         'chance': prof.chance
+                                     })});
+            this.shit_collection.addCard(card);
+        }
+
+
         this.dd_collection = new DDCollection();
+        this.dd_collection.container = this.$el.find('.dd-row ul');
+
+        for (var i = 5; i < 10; i++) {
+            var prof = professions[i];
+            var card = new CardView({id: 'card' + i,
+                                     model: new Card({
+                                         'title': prof.title,
+                                         'chance': prof.chance
+                                     })});
+            this.dd_collection.addCard(card);
+        }
     },
 
 
     pass_cards: function(){
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < 7; i++) {
             var prof = professions[i];
             var card = new CardView({id: 'card' + i,
                                      model: new Card({
