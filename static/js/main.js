@@ -70,14 +70,16 @@ var ShitCollection = CardsCollection.extend({});
 
 // views
 var BaseView = Backbone.View.extend({
-    events: {'click': 'remove',},
+
     hide: function(){ this.$el.removeClass('active'); },
-    show: function(){ this.$el.addClass('active'); }
+    show: function(){ this.$el.addClass('active'); },
 });
 
 var StartView = BaseView.extend({el: $("#start-window")});
 
 var CardView = BaseView.extend({
+  events: {'click': 'hover'},
+
   tagName: 'li',
   className: 'cart-container',
   template: _.template(_.unescape($('.cart-container').html())),
@@ -86,6 +88,9 @@ var CardView = BaseView.extend({
         this.model.bind('change', this.render, this);
         this.model.bind('destroy', this.remove, this);
   },
+
+  hover: function() { this.$el.toggleClass('hover') },
+
   render: function() {
       this.$el.html(
           this.template(this.model.toJSON())

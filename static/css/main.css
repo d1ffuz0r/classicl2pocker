@@ -65,6 +65,9 @@ body {
     position: relative;
     display: table-column;
 }
+#game-window li.hover .cart{
+    box-shadow: 0 0 5px 6px rgb(206, 30, 30);
+}
 #start-window .center {
     text-align: center;
 }
