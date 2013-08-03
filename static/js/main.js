@@ -228,11 +228,12 @@ var GameView = BaseView.extend({
 
             if(this.passes <= 2){
                 this.update_collection(null, 2, true);
-            } else {
-                this.$el.find('.pass-cards').hide();
-                this.$el.find('.pass-cards-message').show();
+                selected = 0;
+                if(this.passes == 2){
+                    this.$el.find('.pass-cards').hide();
+                    this.$el.find('.pass-cards-message').show();
+                }
             }
-            selected = 0;
         } else {
             alert('Выберите 2 карты');
         }
