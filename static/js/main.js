@@ -202,7 +202,7 @@ var GameView = BaseView.extend({
             row = 3;
         }
 
-        collection.addCard(this.create_card(id, item, row););
+        collection.addCard(this.create_card(id, item, row));
     },
 
     initialize: function(){
@@ -219,7 +219,7 @@ var GameView = BaseView.extend({
         for(var i = 1; i < 13; i++){ profs.push(select_prof());}
         profs = _.sortBy(profs, function(i){ return i.type });
 
-        for(prof in profs){ this.push_to_collection(global_counter++, profs[prof]); }
+        for(prof in profs){ this.push_to_collection(global_counter++, profs[prof]);}
     },
 
     pass_cards: function(){
