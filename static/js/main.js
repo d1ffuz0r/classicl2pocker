@@ -40,6 +40,8 @@ var professions = {
     34: {'pid': 34, 'type': DD, 'title': 'Странник Ветра (Wind Rider)', 'chance': 0.98, 'img': './img/prof/.png'},
     35: {'pid': 35, 'type': DD, 'title': 'Храмовник Евы (Evas Templar)', 'chance': 0.77, 'img': './img/prof/.png'},
 };
+
+var profs_count = Object.keys(professions).length;
 var global_counter = 1;
 var selected = 0;
 
@@ -47,7 +49,7 @@ var select_prof = function(){
     var prof = null;
 
     while(!prof){
-        prof = professions[Math.round(Math.random(professions.length) * 10)]
+        prof = professions[Math.floor((Math.random(profs_count) * profs_count))];
     }
     return prof;
 
