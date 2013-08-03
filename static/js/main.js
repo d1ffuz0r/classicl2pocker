@@ -74,7 +74,6 @@ var BaseView = Backbone.View.extend({
         'click': 'remove'
     },
 
-
     hide: function(){
         this.$el.removeClass('active');
     },
@@ -95,7 +94,7 @@ var CardView = BaseView.extend({
 
   render: function() {
       this.$el.html(
-          this.template()
+          this.template(this.model.toJSON())
       );
       return this;
   },
@@ -121,21 +120,25 @@ var GameView = BaseView.extend({
 
 
     pass_cards: function(){
-        for (var i = 0; i < 2; i++){
-            var prof = professions[0];
-            var card = new CardView({id: i + '-cart',
-                                     title: prof.title,
-                                     chance: prof.chance});
+        for (var i = 0; i < 2; i++) {
+            var prof = professions[i];
+            var card = new CardView({id: 'card' + i,
+                                     model: new Card({
+                                         'title': prof.title,
+                                         'chance': prof.chance
+                                     })});
             this.support_collection.addCard(card);
         }
     },
 
     pass_party: function(){
-        for (var i = 0; i < 3; i++){
-            var prof = professions[0];
-            var card = new CardView({id: i,
-                                     title: prof.title,
-                                     chance: prof.chance});
+        for (var i = 0; i < 3; i++) {
+            var prof = professions[i];
+            var card = new CardView({id: 'card' + i,
+                                     model: new Card({
+                                         'title': prof.title,
+                                         'chance': prof.chance
+                                     })});
             this.support_collection.addCard(card);
         }
     },
