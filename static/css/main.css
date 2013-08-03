@@ -76,3 +76,8 @@ body {
     height: 100px;
     width: 110px;
 }
+
+
+#templates {
+    display: none;
+}
