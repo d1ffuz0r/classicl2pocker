@@ -56,40 +56,24 @@ var CardsCollection = Backbone.Collection.extend({
         this.add(card.model)
     },
     removeCard: function(prof){
-        console.log(prof)
         this.container.find('#card' + prof).remove()
         this.remove(prof);
     }
 });
 
-var SupportCollection = CardsCollection.extend({
-});
-
-var DDCollection = CardsCollection.extend({
-});
-
-var ShitCollection = CardsCollection.extend({
-});
+var SupportCollection = CardsCollection.extend({});
+var DDCollection = CardsCollection.extend({});
+var ShitCollection = CardsCollection.extend({});
 
 
 // views
 var BaseView = Backbone.View.extend({
-    events: {
-        'click': 'remove'
-    },
-
-    hide: function(){
-        this.$el.removeClass('active');
-    },
-    show: function(){
-        this.$el.addClass('active');
-    },
+    events: {'click': 'remove',},
+    hide: function(){ this.$el.removeClass('active'); },
+    show: function(){ this.$el.addClass('active'); }
 });
 
-var StartView = BaseView.extend({
-    el: $("#start-window"),
-});
-
+var StartView = BaseView.extend({el: $("#start-window")});
 
 var CardView = BaseView.extend({
   tagName: 'li',
@@ -100,17 +84,45 @@ var CardView = BaseView.extend({
         this.model.bind('change', this.render, this);
         this.model.bind('destroy', this.remove, this);
   },
-
   render: function() {
       this.$el.html(
           this.template(this.model.toJSON())
       );
       return this;
   },
-
-
 });
 
+var update_collection = function(collection, start, end, replace){
+    if (!start) { start = 0; }
+    if (!end) { end = 0; }
+
+    if (replace){ // replace items
+        var count = collection.length - 1;
+        for (var i = 0; i < end; i++) {
+            var rnd = Math.floor(Math.random(count) * 10);
+            var prof = collection.at(rnd);
+
+            while(!prof) {
+                var rnd = Math.floor(Math.random(count) * 10);
+                var prof = collection.at(rnd);
+            }
+            collection.removeCard(prof.id);
+        }
+    }
+
+
+    for (var i = start; i < end; i++) {
+        var prof = professions[Math.floor(Math.random(professions.length) * 10)];
+        var card = new CardView({id: 'card' + i,
+                                 model: new Card({
+                                     'id': i,
+                                     'title': prof.title,
+                                     'chance': prof.chance
+                                 })});
+        collection.addCard(card);
+    }
+
+};
 
 var GameView = BaseView.extend({
     passes: 0,
@@ -123,44 +135,16 @@ var GameView = BaseView.extend({
     initialize: function(){
         this.support_collection = new SupportCollection();
         this.support_collection.container = this.$el.find('.support-row ul');
-        for (var i = 0; i < 8; i++) {
-            var prof = professions[i];
-            var card = new CardView({id: 'card' + i,
-                                     model: new Card({
-                                         'id': i,
-                                         'title': prof.title,
-                                         'chance': prof.chance
-                                     })});
-            this.support_collection.addCard(card);
-        }
+        update_collection(this.support_collection, 0, 8);
+
 
         this.shit_collection = new ShitCollection();
         this.shit_collection.container = this.$el.find('.shit-row ul');
-        for (var i = 10; i < 20; i++) {
-            var prof = professions[i];
-            var card = new CardView({id: 'card' + i,
-                                     model: new Card({
-                                         'id': i,
-                                         'title': prof.title,
-                                         'chance': prof.chance
-                                     })});
-            this.shit_collection.addCard(card);
-        }
-
+        update_collection(this.shit_collection, 10, 20);
 
         this.dd_collection = new DDCollection();
         this.dd_collection.container = this.$el.find('.dd-row ul');
-
-        for (var i = 5; i < 10; i++) {
-            var prof = professions[i];
-            var card = new CardView({id: 'card' + i,
-                                     model: new Card({
-                                         'id': i,
-                                         'title': prof.title,
-                                         'chance': prof.chance
-                                     })});
-            this.dd_collection.addCard(card);
-        }
+        update_collection(this.dd_collection, 5, 10)
     },
 
     pass_cards: function(){
@@ -169,51 +153,17 @@ var GameView = BaseView.extend({
         } else {
             this.$el.find('.pass-cards').hide();
             this.$el.find('.pass-cards-message').show();
-            return;
+            return
         }
-
-        var count = this.support_collection.length - 1;
-        for (var i = 0; i < 2; i++) {
-            var rnd = Math.floor(Math.random(count) * 10);
-            var prof = this.support_collection.at(rnd);
-            if(!prof){
-                while(!prof){
-                    var rnd = Math.floor(Math.random(count) * 10);
-                    var prof = this.support_collection.at(rnd);
-                }
-            }
-            console.log([count, prof.id])
-            this.support_collection.removeCard(prof.id);
-        }
-
-        for (var i = 0; i < 2; i++) {
-            var prof = professions[Math.floor(Math.random(professions.length) * 10)];
-            var card = new CardView({id: 'card' + i,
-                                     model: new Card({
-                                         'id': i,
-                                         'title': prof.title,
-                                         'chance': prof.chance
-                                     })});
-            this.support_collection.addCard(card);
-        }
+        update_collection(this.support_collection, 0, 2, true);
     },
 
     pass_party: function(){
-        for (var i = 0; i < 3; i++) {
-            var prof = professions[i];
-            var card = new CardView({id: 'card' + i,
-                                     model: new Card({
-                                         'id': i,
-                                         'title': prof.title,
-                                         'chance': prof.chance
-                                     })});
-            this.support_collection.addCard(card);
-        }
+        update_collection(this.support_collection, 0, 3, true);
     },
 });
 
 // routing
-
 var App = Backbone.Router.extend({
     routes: {
         "!/start": "start",
@@ -227,7 +177,6 @@ var App = Backbone.Router.extend({
     },
 
     start: function() {
-        console.log(this.start);
         this.start.show();
     },
 
