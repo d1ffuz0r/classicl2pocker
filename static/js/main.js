@@ -38,6 +38,7 @@ var professions = {
     34: {'title': 'Храмовник Евы (Evas Templar)', 'chance': 0.77},
 };
 
+
 //models
 
 var Card = Backbone.Model.extend({
@@ -104,6 +105,7 @@ var CardView = BaseView.extend({
 
 
 var GameView = BaseView.extend({
+    passes: 0,
     el: $("#game-window"),
     events: {
         'click .pass-cards': 'pass_cards',
@@ -113,7 +115,9 @@ var GameView = BaseView.extend({
     initialize: function(){
         this.support_collection = new SupportCollection();
         this.support_collection.container = this.$el.find('.support-row ul');
-        this.pass_cards();
+        this.pass_cards(true);
+        this.pass_cards(true);
+        this.pass_cards(true);
 
         this.shit_collection = new ShitCollection();
         this.shit_collection.container = this.$el.find('.shit-row ul');
@@ -142,9 +146,16 @@ var GameView = BaseView.extend({
         }
     },
 
-
-    pass_cards: function(){
-        for (var i = 0; i < 7; i++) {
+    pass_cards: function(pass){
+        if(this.passes < 1){
+            if(pass != true) {
+                this.passes += 1;
+            }
+        } else {
+            this.$el.find('.pass-cards').hide();
+            this.$el.find('.pass-cards-message').show();
+        }
+        for (var i = 0; i < 2; i++) {
             var prof = professions[i];
             var card = new CardView({id: 'card' + i,
                                      model: new Card({
