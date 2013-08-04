@@ -94,7 +94,10 @@ var BaseView = Backbone.View.extend({
     show: function(){ this.$el.addClass('active'); },
 });
 
+var MainView = BaseView.extend({el: $("#main-window")});
 var StartView = BaseView.extend({el: $("#start-window")});
+var FailView = BaseView.extend({el: $("#fail-window")});
+var WinView = BaseView.extend({el: $("#win-window")});
 
 var CardView = BaseView.extend({
   events: {'click': 'click'},
@@ -237,37 +240,57 @@ var GameView = BaseView.extend({
         if (selected == 3) {
             this.update_collection(null, 3, true);
             selected = 0;
+            this.check();
+            return;
         } else {
             alert('Выберите 3 карты');
         }
     },
+
+    check: function(){
+        game_view.hide();
+        if(Math.round(Math.random(1)) == 1){
+            new WinView().show();
+        } else {
+            new FailView().show();
+        }
+    }
 });
 
 // routing
+main_view = new MainView;
+start_view = new StartView;
+game_view = new GameView;
 var App = Backbone.Router.extend({
     routes: {
         "!/start": "start",
         "!/":      "default",
+        "!/win":   "win",
+        "!/fail":  "fail",
         "!/game":  "game",
     },
 
-    initialize: function() {
-        this.start = new StartView;
-        this.game = new GameView;
+    win: function(){
+        new WinView().show();
     },
-
+    fail: function(){
+        new FailView().show();
+    },
     start: function() {
-        this.start.show();
+        main_view.hide();
+        start_view.show();
     },
 
     game: function() {
-        this.start.hide();
-        this.game.show();
+        main_view.hide();
+        start_view.hide();
+        game_view.show();
     },
 
     default: function() {
-        this.start.hide();
-        this.game.hide();
+        main_view.show();
+        start_view.hide();
+        game_view.hide();
     },
 });
 

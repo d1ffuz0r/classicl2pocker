@@ -3,7 +3,7 @@ body {
 }
 #wrapper {
 }
-#content {
+#main-window {
     background-color: #fff;
     height: 100%;
     filter: alpha(opacity=50);
@@ -16,7 +16,7 @@ body {
     position: relative;
 }
 
-#start-window, #game-window {
+#start-window, #game-window, #fail-window, #win-window {
     position: absolute;
     z-index: 2;
     width: 600px;
@@ -72,13 +72,25 @@ body {
     text-align: center;
 }
 
-#start-window, #game-window {
+#main-window, #start-window, #game-window, #win-window, #fail-window {
     display: none;
 }
+
+#win-window, #fail-window {
+    height: 400px;
+    overflow: hidden;
+}
+#win-window {
+    background: #fff;
+}
+#fail-window {
+    color: white;
+    background: #000;
+}
+
 .active {
     display: block !important;
 }
-
 
 .cart {
     cursor: pointer;
@@ -87,7 +99,11 @@ body {
     width: 110px;
 }
 
-
 #templates {
     display: none;
+}
+
+
+#win-window, #fail-window {
+
 }
