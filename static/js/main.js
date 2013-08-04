@@ -150,7 +150,7 @@ var GameView = BaseView.extend({
         return collection;
     },
 
-    create_card: function(id, item, row){
+    create_card: function(id, item){
         return new CardView({
             id: 'card' + id,
             model: new Card({
@@ -158,8 +158,7 @@ var GameView = BaseView.extend({
                 'pid': item.pid,
                 'title': item.title,
                 'chance': item.chance,
-                'type': item.type,
-                'row': row
+                'type': item.type
             })
         });
     },
@@ -185,26 +184,19 @@ var GameView = BaseView.extend({
         }
     },
     push_to_collection: function(id, item){
-        var row = 1;
-
         if(item.type == SUPPORT & this.support_collection.length <= 5){
-
             if(!contains(this.support_collection, item.pid)) {
                 collection = this.support_collection;
             } else {
                 collection = this.shit_collection;
-                row = 3;
             }
-
         } else if(item.type == DD & this.dd_collection.length <= 12) {
             collection = this.dd_collection;
-            row = 2;
         } else {
             collection = this.shit_collection;
-            row = 3;
         }
 
-        collection.addCard(this.create_card(id, item, row));
+        collection.addCard(this.create_card(id, item));
     },
 
     initialize: function(){
