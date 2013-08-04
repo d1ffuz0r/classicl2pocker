@@ -261,6 +261,7 @@ var GameView = BaseView.extend({
 main_view = new MainView;
 start_view = new StartView;
 game_view = new GameView;
+main_view.show();
 var App = Backbone.Router.extend({
     routes: {
         "!/start": "start",
