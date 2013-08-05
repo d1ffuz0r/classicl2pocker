@@ -222,13 +222,13 @@ var GameView = BaseView.extend({
 
     pass_cards: function() {
         if (selected == 3) {
-            this.passes++;
+            //this.passes++;
 
             if(this.passes <= 2) {
                 this.update_collection(null, 3, true);
                 selected = 0;
                 if(this.passes == 2) {
-                    this.$el.find('.pass-cards').hide();
+                    //this.$el.find('.pass-cards').hide();
                 }
             }
         } else {
