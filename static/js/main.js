@@ -1,3 +1,9 @@
+/*
+и еще насчет выбранной пати, помнишь, сделай чтобы ее показывало, то есть, кликнув сделай пати кнопку, она показывает "остаток" сначала, и мб тут только одну кнопку (оценка), и только тогда "твои рандомные мальчики" гггг появляются
+после клика на "оценку"
+
+
+*/
 // professions
 // id Название профы	Процентное отношение
 var SUPPORT = 1;
@@ -137,6 +143,7 @@ var GameView = BaseView.extend({
     events: {
         'click .pass-cards': 'pass_cards',
         'click .pass-party': 'pass_party',
+        'click .show-result': 'show_result',
     },
 
     get_collection_by_type: function(type) {
@@ -222,13 +229,13 @@ var GameView = BaseView.extend({
 
     pass_cards: function() {
         if (selected == 3) {
-            //this.passes++;
+            this.passes++;
 
             if(this.passes <= 2) {
                 this.update_collection(null, 3, true);
                 selected = 0;
                 if(this.passes == 2) {
-                    //this.$el.find('.pass-cards').hide();
+                    this.$el.find('.pass-cards').hide();
                 }
             }
         } else {
@@ -240,8 +247,8 @@ var GameView = BaseView.extend({
         if (selected == 3) {
             this.update_collection(null, 3, true);
             selected = 0;
-            this.check();
-            return;
+            this.$el.find('.pass-party').hide();
+            this.$el.find('.show-result').show();
         } else {
             alert('Выберите 3 карты');
         }
@@ -254,6 +261,10 @@ var GameView = BaseView.extend({
         } else {
             new FailView().show();
         }
+    },
+
+    show_result: function(){
+        this.check();
     }
 });
 
